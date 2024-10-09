@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
-import { Button } from '../ui/button';
-import { ChevronDown, ChevronUp, Copy } from 'lucide-react';
+import { useWalletStore } from '@/hooks/useWalletStore';
 import { copyToClipboard } from '@/utils/copyToClipboard';
 import { motion } from 'framer-motion';
+import { ChevronDown, ChevronUp, Copy } from 'lucide-react';
+import { useState } from 'react';
+import { Button } from '../ui/button';
 
-type Props = {
-  mnemonicWords: string[];
-};
-
-function MnemoicPhasphrase({ mnemonicWords }: Props) {
+function MnemoicPhasphrase() {
   const [showMnemonic, setShowMnemonic] = useState<boolean>(false);
+  const { wallets, mnemonicWords } = useWalletStore();
+
+  if (wallets.length === 0) return;
   return (
     <motion.div
       initial={{ opacity: 0, y: -20 }}
@@ -18,7 +18,7 @@ function MnemoicPhasphrase({ mnemonicWords }: Props) {
         duration: 0.3,
         ease: 'easeInOut',
       }}
-      className="group flex flex-col items-center gap-4 cursor-pointer rounded-lg border border-primary/10 p-8"
+      className="mt-8 group flex flex-col items-center gap-4 cursor-pointer rounded-lg border border-primary/10 p-8"
     >
       <div
         className="flex w-full justify-between items-center"
