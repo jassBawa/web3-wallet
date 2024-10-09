@@ -54,8 +54,12 @@ const WalletCta = () => {
   };
 
   useEffect(() => {
-    const items = JSON.parse(localStorage.getItem('wallets') || '');
-    const words = JSON.parse(localStorage.getItem('mnemonics') || '');
+    const walletStr = localStorage.getItem('wallets');
+    const mnemonicStr = localStorage.getItem('mnemonics');
+
+    const items = walletStr ? JSON.parse(walletStr) : [];
+    const words = mnemonicStr ? JSON.parse(mnemonicStr) : [];
+
     setWallets(items);
     setMnemonicWords(words);
   }, [setWallets, setMnemonicWords]);
