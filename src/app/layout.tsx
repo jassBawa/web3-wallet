@@ -5,6 +5,7 @@ import { Toaster } from '@/components/ui/sonner';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
+import WalletProvider from '@/providers/WalletProvider';
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -33,9 +34,11 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen`}
       >
         <Providers>
-          <Toaster />
-          <Header />
-          {children}
+          <WalletProvider>
+            <Toaster />
+            <Header />
+            {children}
+          </WalletProvider>
         </Providers>
         <Footer />
       </body>
